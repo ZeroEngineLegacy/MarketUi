@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ConfirmationPopUp",
+		uint64 ResourceId = 5806e33dd472ecb7,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"ProjectFun_UIComponents",
+		],
+	},
+},

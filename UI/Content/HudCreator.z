@@ -1,0 +1,34 @@
+/********************************************************/
+/* Copyright 2016 DigiPen, All Rights Reserved          */
+/* Last Update: 12/13/2016                              */
+/********************************************************/
+
+class HudCreator : ZilchComponent
+{
+    // The level that our Hud is contained within
+    [Property]
+    var HUDLevel : Level = null;
+    
+    //Space archetype used to create the the Space tje HUDLevel is in
+    [Property]
+    var HUDSpaceArchetype : Archetype = Archetype.Find("HUDSpace");
+    
+    // Store the space where our Hud is so that we can access and destroy it
+    var HUDSpace : Space = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        // Create the hud space and then load our hud level into it
+        this.HUDSpace = this.GameSession.CreateNamedSpace("HUDSpace", this.HUDSpaceArchetype);
+        this.HUDSpace.LoadLevel(this.HUDLevel);
+    }
+    
+    function Destroyed()
+    {
+        // Make sure to clean up the Hud space when we get destroyed
+        if(this.HUDSpace != null)
+        {
+            this.HUDSpace.Destroy();
+        }
+    }
+}

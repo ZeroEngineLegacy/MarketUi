@@ -1,0 +1,121 @@
+//Copyright: © 2016 DigiPen, All Rights Reserved.
+//Author:    Arend Danielek
+
+class SpriteFader : ZilchComponent
+{
+  [Dependency]
+  var Sprite : Sprite;
+  
+  [Property]
+  var FadeInDur : Real = 1.0;
+  
+  [Property]
+  var FadeOutDur : Real = 1.0;
+  
+  [Property]
+  var FadeInEase : Ease = Ease.Linear;
+  
+  [Property]
+  var FadeOutEase : Ease = Ease.Linear;
+  
+  [Property]
+  var FadeInOnStart : Boolean = true;
+  
+  var Color : Real4 = Real4(0,0,0,1);
+  
+  [Property]
+  var AutoFadeOut : Boolean = false;
+  
+  [Property]
+  var FadeOutDelay : Real = 3.0;
+  
+  [Property]
+  var NextLevel : Level;
+  
+  var TransparentColor : Real4
+  {
+    get
+    {
+      var color = this.Color;
+      color.W = 0.0;
+      return color;
+    }
+  }
+  
+  var FadeSeq : ActionSet;
+  
+  function Initialize(init : CogInitializer)
+  {
+    if(this.FadeInOnStart)
+      Zero.Connect(this.Space, Events.LevelStarted, this.OnLevelStarted);
+      
+    Zero.Connect(this.Space, Events.FadeInEvent, this.OnFadeInEvent);
+    Zero.Connect(this.Space, Events.FadeOutEvent, this.OnFadeOutEvent);
+    Zero.Connect(Zero.Keyboard, Events.KeyDown, this.OnKeyDown);
+  }
+
+  function OnKeyDown(event : KeyboardEvent)
+  {
+    if(this.FadeSeq != null)
+      this.FadeSeq.Cancel();
+    
+    this.Space.DispatchEvent(Events.FadeOutEvent, FadeOutEvent());
+  }
+
+  function OnLevelStarted(event : GameEvent)
+  {
+    this.Space.DispatchEvent(Events.FadeInEvent, FadeInEvent());
+  }
+
+  function OnFadeInEvent(event : FadeInEvent)
+  {
+    if(this.FadeSeq != null)
+      this.FadeSeq.Cancel();
+    
+    var dur = this.FadeInDur;
+    if(event.Dur >= 0.0)
+      dur = event.Dur;
+    
+    this.FadeSeq = Actions.Sequence(this.Owner.Actions);
+    Actions.Property(this.FadeSeq, @this.Sprite.VertexColor, this.TransparentColor, dur, this.FadeInEase);
+    if(this.AutoFadeOut)
+    {
+      Actions.Delay(this.FadeSeq, this.FadeOutDelay);
+      Actions.Property(this.FadeSeq, @this.Sprite.VertexColor, this.Color, this.FadeOutDur, Ease.Linear);
+      Actions.Call(this.FadeSeq, this.LoadNextLevel);
+    }
+  }
+  
+  function LoadNextLevel()
+  {
+    this.Space.LoadLevel(this.NextLevel);
+  }
+
+  function OnFadeOutEvent(event : FadeOutEvent)
+  {
+    if(this.FadeSeq != null)
+      this.FadeSeq.Cancel();
+    
+    var dur = this.FadeOutDur;
+    if(event.Dur >= 0.0)
+      dur = event.Dur;
+    
+    this.FadeSeq = Actions.Sequence(this.Owner.Actions);
+    Actions.Property(this.FadeSeq, @this.Sprite.VertexColor, this.Color, dur, this.FadeOutEase);
+    
+    if(this.NextLevel != null)
+      Actions.Call(this.FadeSeq, this.LoadNextLevel);
+  }
+}
+
+class FadeInEvent : ZilchEvent
+{
+  sends FadeInEvent : FadeInEvent;
+  var Dur : Real = -1.0;
+}
+
+class FadeOutEvent : ZilchEvent
+{
+  sends FadeOutEvent : FadeOutEvent;
+  var Dur : Real = -1.0;
+}

@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "UIMenuManager",
+		uint64 ResourceId = 5806e33dd44cab29,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"ProjectFun_UIComponents",
+		],
+	},
+},
