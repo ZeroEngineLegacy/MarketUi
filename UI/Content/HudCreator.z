@@ -7,14 +7,14 @@ class HudCreator : ZilchComponent
 {
     // The level that our Hud is contained within
     [Property]
-    var HUDLevel : Level = null;
+    var HUDLevel : Level;
     
     //Space archetype used to create the the Space tje HUDLevel is in
     [Property]
     var HUDSpaceArchetype : Archetype = Archetype.Find("HUDSpace");
     
     // Store the space where our Hud is so that we can access and destroy it
-    var HUDSpace : Space = null;
+    var HUDSpace : Space;
     
     function Initialize(init : CogInitializer)
     {

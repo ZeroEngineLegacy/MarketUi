@@ -1,121 +1,156 @@
-//Copyright: © 2016 DigiPen, All Rights Reserved.
-//Author:    Arend Danielek
+/************************************************************************************************************/
+/* Copyright 2017 DigiPen, All Rights Reserved                                                              */
+/* Last Update: 1/4/2017                                                                                    */
+/* Author: Zero Engine Team                                                                                 */
+/* Last updated by: Arend Danielek                                                                          */
+/* Class: SpriteFader                                                                                       */
+/* Brief: Interpolates the alpha of the sprite to 0.0 or 1.0, fading the sprite out or in.                  */
+/************************************************************************************************************/
+
+enum FadeType {Black, White, Transparent}
 
 class SpriteFader : ZilchComponent
 {
-  [Dependency]
-  var Sprite : Sprite;
-  
-  [Property]
-  var FadeInDur : Real = 1.0;
-  
-  [Property]
-  var FadeOutDur : Real = 1.0;
-  
-  [Property]
-  var FadeInEase : Ease = Ease.Linear;
-  
-  [Property]
-  var FadeOutEase : Ease = Ease.Linear;
-  
-  [Property]
-  var FadeInOnStart : Boolean = true;
-  
-  var Color : Real4 = Real4(0,0,0,1);
-  
-  [Property]
-  var AutoFadeOut : Boolean = false;
-  
-  [Property]
-  var FadeOutDelay : Real = 3.0;
-  
-  [Property]
-  var NextLevel : Level;
-  
-  var TransparentColor : Real4
-  {
-    get
+    [Dependency]
+    var Sprite : Sprite;
+    
+    //Duration of the fading sequences
+    [Property]
+    var FadeInDuration : Real = 1.0;
+    
+    [Property]
+    var FadeOutDuration : Real = 1.0;
+    
+    //Ease functions to be used for the interpolation of the Sprite's alpha value
+    [Property]
+    var FadeInEase : Ease = Ease.Linear;
+    
+    [Property]
+    var FadeOutEase : Ease = Ease.Linear;
+    
+    [Property]
+    var FadeInOnLevelStarted : Boolean = true;
+    
+    //Should this sprite fade out automatically after a delay after fading in
+    [Property]
+    var AutoFadeOut : Boolean = false;
+    
+    [Property]
+    var AutoFadeOutDelay : Real = 3.0;
+    
+    //Target color to "fade" to
+    [Property]
+    var FadeTarget : FadeType = FadeType.Black;
+    
+    var OriginalColor : Real4;
+    
+    //Return either black, white, or the transparent version of the original
+    //color depending on the FadeTarget.
+    var FadeColor : Real4
     {
-      var color = this.Color;
-      color.W = 0.0;
-      return color;
+        get
+        {
+            if(this.FadeTarget == FadeType.Black)
+                return Real4(0,0,0,1);
+            else if(this.FadeTarget == FadeType.White)
+                return Real4(1,1,1,1);
+            else// if(this.FadeTarget == FadeType.Transparent)
+            {
+                var color = this.Sprite.VertexColor;
+                color.W = 0.0;
+                return color;
+            }
+        }
     }
-  }
-  
-  var FadeSeq : ActionSet;
-  
-  function Initialize(init : CogInitializer)
-  {
-    if(this.FadeInOnStart)
-      Zero.Connect(this.Space, Events.LevelStarted, this.OnLevelStarted);
-      
-    Zero.Connect(this.Space, Events.FadeInEvent, this.OnFadeInEvent);
-    Zero.Connect(this.Space, Events.FadeOutEvent, this.OnFadeOutEvent);
-    Zero.Connect(Zero.Keyboard, Events.KeyDown, this.OnKeyDown);
-  }
-
-  function OnKeyDown(event : KeyboardEvent)
-  {
-    if(this.FadeSeq != null)
-      this.FadeSeq.Cancel();
     
-    this.Space.DispatchEvent(Events.FadeOutEvent, FadeOutEvent());
-  }
-
-  function OnLevelStarted(event : GameEvent)
-  {
-    this.Space.DispatchEvent(Events.FadeInEvent, FadeInEvent());
-  }
-
-  function OnFadeInEvent(event : FadeInEvent)
-  {
-    if(this.FadeSeq != null)
-      this.FadeSeq.Cancel();
+    var FadeSequence : ActionSet;
     
-    var dur = this.FadeInDur;
-    if(event.Dur >= 0.0)
-      dur = event.Dur;
-    
-    this.FadeSeq = Actions.Sequence(this.Owner.Actions);
-    Actions.Property(this.FadeSeq, @this.Sprite.VertexColor, this.TransparentColor, dur, this.FadeInEase);
-    if(this.AutoFadeOut)
+    function Initialize(init : CogInitializer)
     {
-      Actions.Delay(this.FadeSeq, this.FadeOutDelay);
-      Actions.Property(this.FadeSeq, @this.Sprite.VertexColor, this.Color, this.FadeOutDur, Ease.Linear);
-      Actions.Call(this.FadeSeq, this.LoadNextLevel);
+        this.OriginalColor = this.Sprite.VertexColor;
+        
+        if(this.FadeInOnLevelStarted)
+            Zero.Connect(this.Space, Events.LevelStarted, this.OnLevelStarted);
+        
+        Zero.Connect(this.Space, Events.FadeInEvent, this.OnFadeInEvent);
+        Zero.Connect(this.Space, Events.FadeOutEvent, this.OnFadeOutEvent);
     }
-  }
-  
-  function LoadNextLevel()
-  {
-    this.Space.LoadLevel(this.NextLevel);
-  }
+    
+    function OnLevelStarted(event : GameEvent)
+    {
+        this.Space.DispatchEvent(Events.FadeInEvent, FadeInEvent());
+    }
+    
+    function OnFadeInEvent(event : FadeInEvent)
+    {
+        this.FadeIn();
+    }
+    
+    function FadeIn()
+    {
+        //If there is already a fade sequence running cancel it
+        if(this.FadeSequence != null)
+            this.FadeSequence.Cancel();
+        
+        //Interpolate the sprite color to the original color
+        this.FadeSequence = Actions.Sequence(this.Owner.Actions);
+        Actions.Property(this.FadeSequence, @this.Sprite.VertexColor, this.OriginalColor, this.FadeInDuration, this.FadeInEase);
+        Actions.Call(this.FadeSequence, this.DispatchFadedIn);
+        
+        //If the sprite should auto fade out then add it to the sequence which is fading it in
+        if(this.AutoFadeOut)
+        {
+            Actions.Delay(this.FadeSequence, this.AutoFadeOutDelay);
+            Actions.Call(this.FadeSequence, this.FadeOut);
+        }
+    }
 
-  function OnFadeOutEvent(event : FadeOutEvent)
-  {
-    if(this.FadeSeq != null)
-      this.FadeSeq.Cancel();
+    function OnFadeOutEvent(event : FadeOutEvent)
+    {
+        this.FadeOut();
+    }
     
-    var dur = this.FadeOutDur;
-    if(event.Dur >= 0.0)
-      dur = event.Dur;
+    function FadeOut()
+    {
+        //If there is already a fade sequence running cancel it
+        if(this.FadeSequence != null)
+            this.FadeSequence.Cancel();
+        
+        //Interpolate the sprite color to the FadeColor
+        this.FadeSequence = Actions.Sequence(this.Owner.Actions);
+        Actions.Property(this.FadeSequence, @this.Sprite.VertexColor, this.FadeColor, this.FadeOutDuration, this.FadeOutEase);
+        Actions.Call(this.FadeSequence, this.DispatchFadedOut);
+    }
     
-    this.FadeSeq = Actions.Sequence(this.Owner.Actions);
-    Actions.Property(this.FadeSeq, @this.Sprite.VertexColor, this.Color, dur, this.FadeOutEase);
+    function DispatchFadedIn()
+    {
+        this.Owner.DispatchEvent(Events.SpriteFadedIn, ZilchEvent());
+    }
     
-    if(this.NextLevel != null)
-      Actions.Call(this.FadeSeq, this.LoadNextLevel);
-  }
+    function DispatchFadedOut()
+    {
+        this.Owner.DispatchEvent(Events.SpriteFadedOut, ZilchEvent());
+    }
 }
 
 class FadeInEvent : ZilchEvent
 {
-  sends FadeInEvent : FadeInEvent;
-  var Dur : Real = -1.0;
+    sends FadeInEvent : FadeInEvent;
+    var Dur : Real = -1.0;
+}
+
+class SpriteFadedIn : ZilchEvent
+{
+    sends SpriteFadedIn : SpriteFadedIn;
+}
+
+class SpriteFadedOut : ZilchEvent
+{
+    sends SpriteFadedOut : SpriteFadedOut;
 }
 
 class FadeOutEvent : ZilchEvent
 {
-  sends FadeOutEvent : FadeOutEvent;
-  var Dur : Real = -1.0;
+    sends FadeOutEvent : FadeOutEvent;
+    var Dur : Real = -1.0;
 }

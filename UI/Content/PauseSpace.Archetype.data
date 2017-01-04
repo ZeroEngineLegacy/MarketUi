@@ -6,7 +6,7 @@ Space =
 	},
 	Archetyped = 
 	{
-		string Name = "576f215c0825de61:Space",
+		string Name = "583b88fc421013b2:PauseSpace",
 		bool ModifiedFromArchetype = false,
 	},
 	TimeSpace = 
@@ -40,11 +40,6 @@ Space =
 	},
 	ReactiveSpace = 
 	{
-	},
-	PauseController = 
-	{
-		string PauseSpaceArchetype = "583b88fc421013b2:PauseSpace",
-		string PauseMenuLevel = "583b93f64601a6c1:PauseMenu",
 	},
 	UIMenuManager = 
 	{

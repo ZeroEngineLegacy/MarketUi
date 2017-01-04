@@ -1,36 +1,11 @@
-/********************************************************/
-/* Copyright 2016 DigiPen, All Rights Reserved          */
-/* Last Update: 12/13/2016                              */
-/********************************************************/
-
-//Event to trigger a new value range for the meter
-class MeterValueRangeUpdate : ZilchEvent
-{
-    sends MeterValueRangeUpdate : MeterValueRangeUpdate;
-    var MinVal : Real = 0.0;
-    var MaxVal : Real = 1.0;
-    var StartVal : Real = 1.0;
-}
-
-//Triggers a reset to the initial value range of the meter
-class MeterValueReset : ZilchEvent
-{
-    sends MeterValueReset : MeterValueReset;
-}
-
-//Triggers a value reset using the current value range
-class MeterReset : ZilchEvent
-{
-    sends MeterReset : MeterReset;
-}
-
-//Triggers the value, scale, and justifacation update of the meter
-class MeterUpdate : ZilchEvent
-{
-    sends MeterUpdate : MeterUpdate;
-    var Val : Real = 1.0;
-}
-
+/************************************************************************************************************/
+/* Copyright 2016 DigiPen, All Rights Reserved                                                              */
+/* Last Update: 1/3/2016                                                                                    */
+/* Author: Zero Engine Team                                                                                 */
+/* Last updated by: Arend Danielek                                                                          */
+/* Class: AreaMeter                                                                                         */
+/* Brief: Implements a scaling functionality for a sprite with an Area component based off a percentage.    */
+/************************************************************************************************************/
 
 class AreaMeter : ZilchComponent
 {
@@ -176,4 +151,32 @@ class AreaMeter : ZilchComponent
         
         this.Area.Size = newSize;
     }
+}
+
+//Event to trigger a new value range for the meter
+class MeterValueRangeUpdate : ZilchEvent
+{
+    sends MeterValueRangeUpdate : MeterValueRangeUpdate;
+    var MinVal : Real = 0.0;
+    var MaxVal : Real = 1.0;
+    var StartVal : Real = 1.0;
+}
+
+//Triggers a reset to the initial value range of the meter
+class MeterValueReset : ZilchEvent
+{
+    sends MeterValueReset : MeterValueReset;
+}
+
+//Triggers a value reset using the current value range
+class MeterReset : ZilchEvent
+{
+    sends MeterReset : MeterReset;
+}
+
+//Triggers the value, scale, and justifacation update of the meter
+class MeterUpdate : ZilchEvent
+{
+    sends MeterUpdate : MeterUpdate;
+    var Val : Real = 1.0;
 }

@@ -12,7 +12,7 @@ Cog =
 	},
 	EditorSettings = 
 	{
-		EditorMode EditorMode = Mode3D,
+		EditorMode EditorMode = Mode2D,
 		bool ViewCube = true,
 		float ViewCubeSize = 0.150000006,
 		ScriptReloadMethod ScriptReloadEditor = ReInitializeObjects,

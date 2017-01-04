@@ -12,7 +12,7 @@ GameSession =
 	DefaultGameSetup = 
 	{
 		string StartingSpace = "576f215c0825de61:Space",
-		string StartingLevel = "576f215c0825c3a8:Level",
+		string StartingLevel = "576f215c0825c3a8:MainMenu",
 	},
 	ZilchState = 
 	{
