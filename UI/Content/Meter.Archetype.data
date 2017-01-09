@@ -1,0 +1,54 @@
+Cog = 
+{
+	LinkId = 
+	{
+		uint Id = 1,
+	},
+	Named = 
+	{
+		string Name = "Meter",
+	},
+	Archetyped = 
+	{
+		string Name = "5838159da08ffaa5:Meter",
+		bool ModifiedFromArchetype = false,
+	},
+	Transform = 
+	{
+		Vec3 Translation = [-5.79220724, 6.70129871, 0],
+		Vec3 Scale = [1, 1, 1],
+		Quat Rotation = [0, 0, 0, 1],
+	},
+	Sprite = 
+	{
+		bool Visible = true,
+		bool ViewCulling = true,
+		bool VisibilityEvents = true,
+		string Material = "56dcc7b15f51207d:DefaultSpriteMaterial",
+		Vec4 VertexColor = [1, 0, 0, 1],
+		SpriteGeometryMode GeometryMode = ZPlane,
+		string SpriteSource = "583b9859e72c79d4:Button3",
+		bool FlipX = false,
+		bool FlipY = false,
+		bool AnimationActive = true,
+		float AnimationSpeed = 1,
+		uint StartFrame = 0,
+	},
+	Area = 
+	{
+		Vec2 Size = [5, 1],
+		Location Origin = Center,
+	},
+	AreaMeter = 
+	{
+		float InitMaxVal = 1,
+		float InitMinVal = 0,
+		float InitStartVal = 1,
+		bool ScaleX = true,
+		bool ScaleY = false,
+	},
+	MeterTest = 
+	{
+		float IncrementVal = 0.100000001,
+	},
+},

@@ -1,0 +1,30 @@
+class MeterTest : ZilchComponent
+{
+    [Property]
+    var IncrementVal : Real = 0.1;
+    
+    var Val : Real = 0.0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(Zero.Keyboard.KeyIsPressed(Keys.Up))
+        {
+            var meterUpdate = MeterUpdate();
+            this.Val += this.IncrementVal;
+            meterUpdate.Val = this.Val;
+            this.Owner.DispatchEvent(Events.MeterUpdate, meterUpdate);
+        }
+        if(Zero.Keyboard.KeyIsPressed(Keys.Down))
+        {
+            var meterUpdate = MeterUpdate();
+            this.Val -= this.IncrementVal;
+            meterUpdate.Val = this.Val;
+            this.Owner.DispatchEvent(Events.MeterUpdate, meterUpdate);
+        }
+    }
+}

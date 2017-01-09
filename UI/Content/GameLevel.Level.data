@@ -40,6 +40,11 @@ Level =
 			int HilightInterval = 10,
 			bool FollowEditorCamera = false,
 		},
+		HudCreator = 
+		{
+			string HUDLevel = "583815a9adea71ca:HUDLevel",
+			string HUDSpaceArchetype = "576f215c0825de61:Space",
+		},
 	},
 	Cog = 
 	{
@@ -53,7 +58,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 0, 50],
+			Vec3 Translation = [-9.52710819, 8.27416992, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -107,7 +112,7 @@ Level =
 			float FarPlane = 500,
 			PerspectiveMode PerspectiveMode = Orthographic,
 			float FieldOfView = 45,
-			float Size = 20,
+			float Size = 14.8163691,
 		},
 		DefaultRenderer = 
 		{
@@ -120,7 +125,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [0, 0, 0],
+			Vec3 LookTarget = [-9.52710819, 8.27416992, -4.16443015e-07],
 			float MoveSensitivity = 1,
 		},
 	},
@@ -194,7 +199,7 @@ Level =
 		},
 		DefaultRenderer = 
 		{
-			Vec4 ClearColor = [0, 0, 0, 1],
+			Vec4 ClearColor = [0, 1, 0.0399999619, 1],
 			bool DrawDebug = false,
 		},
 		SoundListener = 
