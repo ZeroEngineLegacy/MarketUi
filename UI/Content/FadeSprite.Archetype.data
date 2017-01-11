@@ -1,0 +1,44 @@
+Cog = 
+{
+	LinkId = 
+	{
+		uint Id = 1,
+	},
+	Named = 
+	{
+		string Name = "FadeSprite",
+	},
+	Transform = 
+	{
+		Vec3 Translation = [0, 0, 1],
+		Vec3 Scale = [194.258377, 252.966278, 1],
+		Quat Rotation = [0, 0, 0, 1],
+	},
+	Sprite = 
+	{
+		bool Visible = true,
+		bool ViewCulling = true,
+		bool VisibilityEvents = true,
+		string Material = "56dcc7b15f51207d:DefaultSpriteMaterial",
+		Vec4 VertexColor = [1, 1, 1, 1],
+		SpriteGeometryMode GeometryMode = ZPlane,
+		string SpriteSource = "5275aa4d802dd6dc:Square",
+		bool FlipX = false,
+		bool FlipY = false,
+		bool AnimationActive = true,
+		float AnimationSpeed = 1,
+		uint StartFrame = 0,
+	},
+	SpriteFader = 
+	{
+		float FadeInDuration = 1,
+		float FadeOutDuration = 1,
+		Enum FadeInEase = Linear,
+		Enum FadeOutEase = Linear,
+		bool FadeInOnLevelStarted = true,
+		Vec4 FadeInTarget = [1, 1, 1, 0],
+		Vec4 FadeOutTarget = [1, 1, 1, 1],
+		bool AutoFadeOut = true,
+		float AutoFadeOutDelay = 2,
+	},
+},

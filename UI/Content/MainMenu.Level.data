@@ -145,7 +145,7 @@ Level =
 			Facing Facing = NegativeZ,
 			float NearPlane = 0.5,
 			float FarPlane = 100,
-			PerspectiveMode PerspectiveMode = Perspective,
+			PerspectiveMode PerspectiveMode = Orthographic,
 			float FieldOfView = 45,
 			float Size = 20,
 		},
@@ -188,8 +188,8 @@ Level =
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
 			},
-			Vec2 Resolution = [1280, 720],
-			ViewportScaling ViewportScaling = Fill,
+			Vec2 Resolution = [1920, 1080],
+			ViewportScaling ViewportScaling = Letterbox,
 			Vec4 MarginColor = [0, 0, 0, 1],
 		},
 		DefaultRenderer = 
@@ -371,11 +371,39 @@ Level =
 			},
 		},
 	},
+	Cog ("5823ac357ca63d68:FadeSprite") = 
+	{
+		Archetyped = 
+		{
+			string Name = "5823ac357ca63d68:FadeSprite",
+			bool ModifiedFromArchetype = true,
+		},
+		LinkId = 
+		{
+			uint Id = 9,
+		},
+		Transform = 
+		{
+			Vec3 Translation = [0, 0, 2],
+		},
+		SpriteFader = 
+		{
+			float FadeInDuration = 2,
+			float FadeOutDuration = 2,
+			Vec4 FadeOutTarget = [1, 1, 1, 1],
+			bool AutoFadeOut = false,
+		},
+		+ LoadLevelOnEvent = 
+		{
+			string EventString = "SpriteFadedOut",
+			string LevelToLoad = "5823bf04cdc49342:ZeroEngineLogo",
+		},
+	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 9,
+			uint Id = 10,
 		},
 		Named = 
 		{
@@ -393,7 +421,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 10,
+					uint Id = 11,
 				},
 				Named = 
 				{
@@ -444,7 +472,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 11,
+							uint Id = 12,
 						},
 						Named = 
 						{
@@ -482,7 +510,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 12,
+					uint Id = 13,
 				},
 				Named = 
 				{
@@ -533,7 +561,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 13,
+							uint Id = 14,
 						},
 						Named = 
 						{
@@ -571,7 +599,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 14,
+					uint Id = 15,
 				},
 				Named = 
 				{
@@ -622,7 +650,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 15,
+							uint Id = 16,
 						},
 						Named = 
 						{
@@ -660,7 +688,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 16,
+					uint Id = 17,
 				},
 				Named = 
 				{
@@ -711,7 +739,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 17,
+							uint Id = 18,
 						},
 						Named = 
 						{

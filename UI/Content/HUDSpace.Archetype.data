@@ -6,7 +6,7 @@ Space =
 	},
 	Archetyped = 
 	{
-		string Name = "576f215c0825de61:Space",
+		string Name = "58381740e1c56257:HUDSpace",
 		bool ModifiedFromArchetype = false,
 	},
 	TimeSpace = 
@@ -40,35 +40,5 @@ Space =
 	},
 	ReactiveSpace = 
 	{
-	},
-	PauseController = 
-	{
-		string PauseSpaceArchetype = "583b88fc421013b2:PauseSpace",
-		string PauseMenuLevel = "583b93f64601a6c1:PauseMenu",
-	},
-	UIMenuManager = 
-	{
-		bool Active = true,
-		CogPath SelectionArrow = 
-		{
-			string Path = "",
-			bool ErrorOnResolveToNull = false,
-			bool ErrorOnPathCantCompute = false,
-			bool ErrorOnDirectLinkFail = false,
-			bool UpdateCogOnPathChange = true,
-			bool UpdatePathOnCogChange = true,
-			bool UpdateCogOnInitialize = true,
-			bool ResolvedNullErrorOccurred = false,
-			uint ResolvedCog = 2,
-			CogPathPreference PathPreference0 = CogRelative,
-			CogPathPreference PathPreference1 = SpaceRelative,
-			CogPathPreference PathPreference2 = Absolute,
-		},
-		Vec3 ArrowOffset = [0, 0, 0],
-	},
-	ConfirmationPopUp = 
-	{
-		string ConLevel = "583b96202befed29:ConfirmationLevel",
-		string ConSpaceArchetype = "583b88e340d2d64a:ConSpace",
 	},
 },

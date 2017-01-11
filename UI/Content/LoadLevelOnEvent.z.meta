@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "LoadLevelOnEvent",
+		uint64 ResourceId = 5823ad00a72e8610,
+	},
+},

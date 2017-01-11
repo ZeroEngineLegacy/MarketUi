@@ -2,7 +2,7 @@ TextContent =
 {
 	ZilchScriptBuilder = 
 	{
-		string Name = "HudCreator",
+		string Name = "SpaceCreator",
 		uint64 ResourceId = 532e2ab87b295e08,
 	},
 	ContentTags = 

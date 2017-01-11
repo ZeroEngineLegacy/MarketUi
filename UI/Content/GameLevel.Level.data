@@ -40,10 +40,10 @@ Level =
 			int HilightInterval = 10,
 			bool FollowEditorCamera = false,
 		},
-		HudCreator = 
+		SpaceCreator = 
 		{
-			string HUDLevel = "583815a9adea71ca:HUDLevel",
-			string HUDSpaceArchetype = "576f215c0825de61:Space",
+			string SpaceArchetype = "58381740e1c56257:HUDSpace",
+			string LevelToLoad = "583815a9adea71ca:HUDLevel",
 		},
 	},
 	Cog = 
@@ -112,7 +112,7 @@ Level =
 			float FarPlane = 500,
 			PerspectiveMode PerspectiveMode = Orthographic,
 			float FieldOfView = 45,
-			float Size = 14.8163691,
+			float Size = 54.3656387,
 		},
 		DefaultRenderer = 
 		{
@@ -199,7 +199,7 @@ Level =
 		},
 		DefaultRenderer = 
 		{
-			Vec4 ClearColor = [0, 1, 0.0399999619, 1],
+			Vec4 ClearColor = [0, 0, 0, 1],
 			bool DrawDebug = false,
 		},
 		SoundListener = 

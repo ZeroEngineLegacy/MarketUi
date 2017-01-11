@@ -3,36 +3,36 @@
 /* Last Update: 1/4/2017                                                                                    */
 /* Author: Zero Engine Team                                                                                 */
 /* Last updated by: Arend Danielek                                                                          */
-/* Class: HudCreator                                                                                        */
+/* Class: SpaceCreator                                                                                        */
 /* Brief: Creates a space and loads the given hud level into it                                             */
 /************************************************************************************************************/
 
-class HudCreator : ZilchComponent
+class SpaceCreator : ZilchComponent
 {
-    // The level that our Hud is contained within
+    //Space archetype used to create the the Space
     [Property]
-    var HUDLevel : Level;
+    var SpaceArchetype : Archetype;
     
-    //Space archetype used to create the the Space tje HUDLevel is in
+    // Store the space where our level will be loaded
+    var CreatedSpace : Space;
+    
+    // The level that is to be loaded
     [Property]
-    var HUDSpaceArchetype : Archetype = Archetype.Find("HUDSpace");
-    
-    // Store the space where our Hud is so that we can access and destroy it
-    var HUDSpace : Space;
+    var LevelToLoad : Level;
     
     function Initialize(init : CogInitializer)
     {
-        // Create the hud space and then load our hud level into it
-        this.HUDSpace = this.GameSession.CreateNamedSpace("HUDSpace", this.HUDSpaceArchetype);
-        this.HUDSpace.LoadLevel(this.HUDLevel);
+        // Create the space and then load our level into it
+        this.CreatedSpace = this.GameSession.CreateNamedSpace("Space", this.SpaceArchetype);
+        this.CreatedSpace.LoadLevel(this.LevelToLoad);
     }
     
     function Destroyed()
     {
-        // Make sure to clean up the Hud space when we get destroyed
-        if(this.HUDSpace != null)
+        // Make sure to clean up the space when we get destroyed
+        if(this.CreatedSpace != null)
         {
-            this.HUDSpace.Destroy();
+            this.CreatedSpace.Destroy();
         }
     }
 }

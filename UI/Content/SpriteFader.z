@@ -4,10 +4,8 @@
 /* Author: Zero Engine Team                                                                                 */
 /* Last updated by: Arend Danielek                                                                          */
 /* Class: SpriteFader                                                                                       */
-/* Brief: Interpolates the alpha of the sprite to 0.0 or 1.0, fading the sprite out or in.                  */
+/* Brief: Interpolates the color value of a sprite from a start value to another and back again.            */
 /************************************************************************************************************/
-
-enum FadeType {Black, White, Transparent}
 
 class SpriteFader : ZilchComponent
 {
@@ -31,6 +29,12 @@ class SpriteFader : ZilchComponent
     [Property]
     var FadeInOnLevelStarted : Boolean = true;
     
+    [Property]
+    var FadeInTarget : Real4 = Real4(0,0,0,0);
+    
+    [Property]
+    var FadeOutTarget : Real4 = Real4(0,0,0,1);
+    
     //Should this sprite fade out automatically after a delay after fading in
     [Property]
     var AutoFadeOut : Boolean = false;
@@ -38,37 +42,10 @@ class SpriteFader : ZilchComponent
     [Property]
     var AutoFadeOutDelay : Real = 3.0;
     
-    //Target color to "fade" to
-    [Property]
-    var FadeTarget : FadeType = FadeType.Black;
-    
-    var OriginalColor : Real4;
-    
-    //Return either black, white, or the transparent version of the original
-    //color depending on the FadeTarget.
-    var FadeColor : Real4
-    {
-        get
-        {
-            if(this.FadeTarget == FadeType.Black)
-                return Real4(0,0,0,1);
-            else if(this.FadeTarget == FadeType.White)
-                return Real4(1,1,1,1);
-            else// if(this.FadeTarget == FadeType.Transparent)
-            {
-                var color = this.Sprite.VertexColor;
-                color.W = 0.0;
-                return color;
-            }
-        }
-    }
-    
     var FadeSequence : ActionSet;
     
     function Initialize(init : CogInitializer)
     {
-        this.OriginalColor = this.Sprite.VertexColor;
-        
         if(this.FadeInOnLevelStarted)
             Zero.Connect(this.Space, Events.LevelStarted, this.OnLevelStarted);
         
@@ -94,7 +71,7 @@ class SpriteFader : ZilchComponent
         
         //Interpolate the sprite color to the original color
         this.FadeSequence = Actions.Sequence(this.Owner.Actions);
-        Actions.Property(this.FadeSequence, @this.Sprite.VertexColor, this.OriginalColor, this.FadeInDuration, this.FadeInEase);
+        Actions.Property(this.FadeSequence, @this.Sprite.VertexColor, this.FadeInTarget, this.FadeInDuration, this.FadeInEase);
         Actions.Call(this.FadeSequence, this.DispatchFadedIn);
         
         //If the sprite should auto fade out then add it to the sequence which is fading it in
@@ -118,7 +95,7 @@ class SpriteFader : ZilchComponent
         
         //Interpolate the sprite color to the FadeColor
         this.FadeSequence = Actions.Sequence(this.Owner.Actions);
-        Actions.Property(this.FadeSequence, @this.Sprite.VertexColor, this.FadeColor, this.FadeOutDuration, this.FadeOutEase);
+        Actions.Property(this.FadeSequence, @this.Sprite.VertexColor, this.FadeOutTarget, this.FadeOutDuration, this.FadeOutEase);
         Actions.Call(this.FadeSequence, this.DispatchFadedOut);
     }
     
@@ -139,6 +116,12 @@ class FadeInEvent : ZilchEvent
     var Dur : Real = -1.0;
 }
 
+class FadeOutEvent : ZilchEvent
+{
+    sends FadeOutEvent : FadeOutEvent;
+    var Dur : Real = -1.0;
+}
+
 class SpriteFadedIn : ZilchEvent
 {
     sends SpriteFadedIn : SpriteFadedIn;
@@ -147,10 +130,4 @@ class SpriteFadedIn : ZilchEvent
 class SpriteFadedOut : ZilchEvent
 {
     sends SpriteFadedOut : SpriteFadedOut;
-}
-
-class FadeOutEvent : ZilchEvent
-{
-    sends FadeOutEvent : FadeOutEvent;
-    var Dur : Real = -1.0;
 }

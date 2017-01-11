@@ -10,6 +10,21 @@ Level =
 		{
 			string Name = "LevelSettings",
 		},
+		GravityEffect = 
+		{
+			bool Active = true,
+			bool WakeUpOnChange = false,
+			bool LocalSpaceDirection = true,
+			float Strength = 10,
+			Vec3 Direction = [0, -1, 0],
+		},
+		DragEffect = 
+		{
+			bool Active = true,
+			bool WakeUpOnChange = false,
+			float Drag = 0.699999988,
+			float AngularDrag = 0.100000001,
+		},
 		GridDraw = 
 		{
 			bool Active = true,
@@ -19,7 +34,7 @@ Level =
 			int Lines = 100,
 			bool DrawAxisOrigins = true,
 			bool AlwaysDrawInEditor = true,
-			bool DrawInGame = true,
+			bool DrawInGame = false,
 			Vec4 GridColor = [0.5, 0.5, 0.5, 0.400000006],
 			Vec4 GridHiLight = [0, 0, 0, 0.400000006],
 			int HilightInterval = 10,
@@ -92,7 +107,7 @@ Level =
 			float FarPlane = 500,
 			PerspectiveMode PerspectiveMode = Orthographic,
 			float FieldOfView = 45,
-			float Size = 20,
+			float Size = 54.3656006,
 		},
 		DefaultRenderer = 
 		{
@@ -131,7 +146,7 @@ Level =
 			bool RenderInGame = true,
 			bool RenderToViewport = true,
 			bool ForwardViewportEvents = false,
-			uint RenderOrder = 1,
+			uint RenderOrder = 0,
 			Vec2 NormalizedSize = [1, 1],
 			Vec2 NormalizedOffset = [0, 0],
 			CogPath Camera = 
@@ -166,7 +181,7 @@ Level =
 			},
 			Vec2 Resolution = [1920, 1080],
 			ViewportScaling ViewportScaling = Letterbox,
-			Vec4 MarginColor = [0.214999974, 0.0763249993, 0.0763249993, 0],
+			Vec4 MarginColor = [0, 0, 0, 1],
 		},
 		Camera = 
 		{
@@ -177,38 +192,73 @@ Level =
 			float FieldOfView = 45,
 			float Size = 20,
 		},
+		DefaultRenderer = 
+		{
+			Vec4 ClearColor = [1, 1, 1, 1],
+			bool DrawDebug = false,
+		},
 		SoundListener = 
 		{
 			bool Active = true,
 		},
-		HUDRenderer = 
-		{
-			Vec4 ClearColor = [0, 0, 1, 0],
-			bool DrawDebug = true,
-		},
 	},
-	Cog ("5838159da08ffaa5:Meter") = 
+	Cog = 
 	{
-		Archetyped = 
-		{
-			string Name = "5838159da08ffaa5:Meter",
-			bool ModifiedFromArchetype = true,
-		},
 		LinkId = 
 		{
 			uint Id = 4,
 		},
+		Named = 
+		{
+			string Name = "DPLogo",
+		},
 		Transform = 
 		{
-			Vec3 Translation = [-5.79220724, 6.70129871, 0],
+			Vec3 Translation = [0, 0, 0],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0, 1],
 		},
 		Sprite = 
 		{
+			bool Visible = true,
+			bool ViewCulling = true,
+			bool VisibilityEvents = true,
+			string Material = "56dcc7b15f51207d:DefaultSpriteMaterial",
 			Vec4 VertexColor = [1, 1, 1, 1],
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteSource = "5823bf6fba57b994:DigiPenLogo",
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
 		},
-		Area = 
+	},
+	Cog ("5823ac357ca63d68:FadeSprite") = 
+	{
+		Archetyped = 
 		{
-			Vec2 Size = [5, 1],
+			string Name = "5823ac357ca63d68:FadeSprite",
+			bool ModifiedFromArchetype = true,
+		},
+		LinkId = 
+		{
+			uint Id = 5,
+		},
+		Transform = 
+		{
+			Vec3 Translation = [0, 0, 1],
+		},
+		SpriteFader = 
+		{
+			float FadeInDuration = 2,
+			float FadeOutDuration = 2,
+			Vec4 FadeOutTarget = [1, 1, 1, 1],
+		},
+		+ LoadLevelOnEvent = 
+		{
+			string EventString = "SpriteFadedOut",
+			string LevelToLoad = "5823bf04cdc49342:ZeroEngineLogo",
 		},
 	},
 },

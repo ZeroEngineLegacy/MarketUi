@@ -1,0 +1,38 @@
+class Spin2D : ZilchComponent
+{
+    [Dependency]
+    var Transform : Transform;
+    
+    [Property]
+    var Axis : GridAxis = GridAxis.ZAxis;
+    
+    [Property]
+    var Speed : Real = 45.0;
+    var SpeedRad : Real { get { return Math.ToRadians(this.Speed); } }
+    
+    [Property]
+    var RotateClockwise : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var angles = Real3();
+        var theta = this.SpeedRad * event.Dt;
+        
+        if(this.RotateClockwise)
+            theta *= -1.0;
+        
+        if(this.Axis == GridAxis.XAxis)
+            angles.X += theta;
+        else if(this.Axis == GridAxis.YAxis)
+            angles.Y += theta;
+        else if(this.Axis == GridAxis.ZAxis)
+            angles.Z += theta;
+        
+        this.Transform.RotateAnglesWorld(angles);
+    }
+}
