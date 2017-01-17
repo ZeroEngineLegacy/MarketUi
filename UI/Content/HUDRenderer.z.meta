@@ -1,8 +1,17 @@
-TextContent = 
+[Version:1]
+TextContent 
 {
-	ZilchScriptBuilder = 
+	ZilchScriptBuilder 
 	{
-		string Name = "HUDRenderer",
-		uint64 ResourceId = 583817900b63e1c1,
-	},
-},
+		var Name = "HUDRenderer"
+		var ResourceId = 0x583817900b63e1c1
+	}
+	ContentTags 
+	{
+		var Tags = Array
+		{
+			"UI"
+			"Renderer"
+		}
+	}
+}

@@ -1,8 +1,17 @@
-TextContent = 
+[Version:1]
+TextContent 
 {
-	ZilchScriptBuilder = 
+	ZilchScriptBuilder 
 	{
-		string Name = "MeterTest",
-		uint64 ResourceId = 583815b1a9262d20,
-	},
-},
+		var Name = "MeterTest"
+		var ResourceId = 0x583815b1a9262d20
+	}
+	ContentTags 
+	{
+		var Tags = Array
+		{
+			"UI"
+			"Test"
+		}
+	}
+}

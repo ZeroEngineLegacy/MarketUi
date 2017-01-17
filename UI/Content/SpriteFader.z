@@ -7,6 +7,28 @@
 /* Brief: Interpolates the color value of a sprite from a start value to another and back again.            */
 /************************************************************************************************************/
 
+class FadeInEvent : ZilchEvent
+{
+    sends FadeInEvent : FadeInEvent;
+    var Dur : Real = -1.0;
+}
+
+class FadeOutEvent : ZilchEvent
+{
+    sends FadeOutEvent : FadeOutEvent;
+    var Dur : Real = -1.0;
+}
+
+class SpriteFadedIn : ZilchEvent
+{
+    sends SpriteFadedIn : SpriteFadedIn;
+}
+
+class SpriteFadedOut : ZilchEvent
+{
+    sends SpriteFadedOut : SpriteFadedOut;
+}
+
 class SpriteFader : ZilchComponent
 {
     [Dependency]
@@ -108,26 +130,4 @@ class SpriteFader : ZilchComponent
     {
         this.Owner.DispatchEvent(Events.SpriteFadedOut, ZilchEvent());
     }
-}
-
-class FadeInEvent : ZilchEvent
-{
-    sends FadeInEvent : FadeInEvent;
-    var Dur : Real = -1.0;
-}
-
-class FadeOutEvent : ZilchEvent
-{
-    sends FadeOutEvent : FadeOutEvent;
-    var Dur : Real = -1.0;
-}
-
-class SpriteFadedIn : ZilchEvent
-{
-    sends SpriteFadedIn : SpriteFadedIn;
-}
-
-class SpriteFadedOut : ZilchEvent
-{
-    sends SpriteFadedOut : SpriteFadedOut;
 }

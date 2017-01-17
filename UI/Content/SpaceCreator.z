@@ -13,23 +13,23 @@ class SpaceCreator : ZilchComponent
     [Property]
     var SpaceArchetype : Archetype;
     
-    // Store the space where our level will be loaded
-    var CreatedSpace : Space;
-    
-    // The level that is to be loaded
+    //The level that is to be loaded
     [Property]
     var LevelToLoad : Level;
     
+    //Store the space where our level will be loaded
+    var CreatedSpace : Space;
+    
     function Initialize(init : CogInitializer)
     {
-        // Create the space and then load our level into it
+        //Create the space and then load our level into it
         this.CreatedSpace = this.GameSession.CreateNamedSpace("Space", this.SpaceArchetype);
         this.CreatedSpace.LoadLevel(this.LevelToLoad);
     }
     
     function Destroyed()
     {
-        // Make sure to clean up the space when we get destroyed
+        //Make sure to clean up the space when we get destroyed
         if(this.CreatedSpace != null)
         {
             this.CreatedSpace.Destroy();

@@ -21,12 +21,12 @@ class PauseController : ZilchComponent
     [Property]
     var PauseSpaceArchetype : Archetype;
     
-    //The space into which the pause menu level is loaded
-    var PauseSpace : Space;
-    
     //Level to load into the PauseSpace as the pause menu
     [Property]
     var PauseMenuLevel : Level;
+    
+    //The space into which the pause menu level is loaded
+    var PauseSpace : Space;
     
     function Initialize(init : CogInitializer)
     {
@@ -58,7 +58,6 @@ class PauseController : ZilchComponent
             if(this.PauseSpace == null)
                 //Dispatch pause game event
                 this.Space.DispatchEvent(Events.PauseGameEvent, ZilchEvent());
-            //else
             else
                 //Dispatch the unpause game event
                 this.Space.DispatchEvent(Events.UnpauseGameEvent, ZilchEvent());

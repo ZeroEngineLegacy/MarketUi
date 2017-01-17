@@ -62,7 +62,7 @@ class UIMenuManager : ZilchComponent
             }
         }
     }
-
+    
     function OnUIButtonEnterClickedState(event : UIButtonStateChange)
     {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////

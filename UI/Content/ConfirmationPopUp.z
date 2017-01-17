@@ -37,13 +37,13 @@ class ConfirmationPopUp : ZilchComponent
     [Property]
     var ConLevel : Level;
     
-    // Variable to reference the new space where the confirmation window will exist
-    var ConSpace : Space;
-    
     // Space archetype used to create the new space for the level containing the
     // confirmation window
     [Property]
     var ConSpaceArchetype : Archetype;
+    
+    // Variable to reference the new space where the confirmation window will exist
+    var ConSpace : Space;
     
     var ResponseFunction : delegate();
     
@@ -51,7 +51,7 @@ class ConfirmationPopUp : ZilchComponent
     {
         Zero.Connect(this.Space, Events.ConfirmationPopUpRequest, this.OnConfirmationPopUpRequest);
     }
-
+    
     // When ConfirmationPopUpRequest event is heard a module dialog should appear
     // asking "Are you sure?"
     function OnConfirmationPopUpRequest(event : ConfirmationPopUpRequest)
@@ -71,7 +71,7 @@ class ConfirmationPopUp : ZilchComponent
         // Connect to ConfirmationPopUpResponse on the modal dialog
         Zero.Connect(this.Space, Events.ConfirmationPopUpResponse, this.OnConfirmationPopUpResponse);
     }
-
+    
     //Boolean response event sent by the modal dialog
     function OnConfirmationPopUpResponse(event : ConfirmationPopUpResponse)
     {

@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "Spin2D",
-		uint64 ResourceId = 5823bf2cc8e73903,
-	},
-},

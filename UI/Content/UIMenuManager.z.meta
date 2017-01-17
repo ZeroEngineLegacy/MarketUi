@@ -1,15 +1,16 @@
-TextContent = 
+[Version:1]
+TextContent 
 {
-	ZilchScriptBuilder = 
+	ZilchScriptBuilder 
 	{
-		string Name = "UIMenuManager",
-		uint64 ResourceId = 5806e33dd44cab29,
-	},
-	ContentTags = 
+		var Name = "UIMenuManager"
+		var ResourceId = 0x5806e33dd44cab29
+	}
+	ContentTags 
 	{
-		Array Tags = 
-		[
-			"ProjectFun_UIComponents",
-		],
-	},
-},
+		var Tags = Array
+		{
+			"UI"
+		}
+	}
+}

@@ -137,7 +137,6 @@ class UIButton : ZilchComponent
         this.Space.DispatchEvent(Events.UIButtonEnterClickedState, stateEvent);
     }
     
-    
     // Dispatches an instance of UIButtonEvent that sends the following info: a 
     // reference to the button object itself, the current state of the button, 
     // and the level to load to if the button is clicked.
@@ -153,4 +152,3 @@ class UIButton : ZilchComponent
         return buttonEvent;
     }
 }
-
