@@ -113,6 +113,9 @@ class AreaMeter : ZilchComponent
     //Update the meter scale using the current value range
     function OnMeterUpdate(event : MeterUpdate)
     {
+        if (event.Val < 0.0)
+            event.Val = 0.0;
+        
         //Store the previous value and percentage
         this.PrevVal = this.CurVal;
         this.PrevPerc = this.CurPerc;

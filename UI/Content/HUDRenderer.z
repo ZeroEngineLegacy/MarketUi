@@ -22,7 +22,6 @@ class HUDRenderer : ZilchComponent
         alphaSettings.SetBlendAlpha();
 
         var renderPass = DefaultRenderPass();
-        Console.WriteLine(this.ClearColor);
         event.AddRenderTaskClearTarget(color, depth, this.ClearColor, 1.0);
         event.AddRenderTaskRenderPass(color, depth, opaqueSettings, RenderGroup.DefaultRenderGroup, renderPass);
         event.AddRenderTaskRenderPass(color, depth, alphaSettings, RenderGroup.AlphaBlend, renderPass);

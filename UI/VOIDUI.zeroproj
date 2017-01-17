@@ -1,31 +1,33 @@
-Cog = 
+[Version:1]
+Cog 
 {
-	Project = 
+	var Name = ""
+	Project 
 	{
-		string ProjectName = "VOIDUI",
-		string ProjectOwner = "",
-		string DefaultLevel = "Level",
-		string ProjectSpace = "Space",
-		uint ProjectEngineRevision = 14599,
-		bool AutoTakeProjectScreenshot = true,
-		uint64 Guid = 5806f028e95e3821,
-	},
-	EditorSettings = 
+		var ProjectName = "VOIDUI"
+		var ProjectOwner = ""
+		var DefaultLevel = "Level"
+		var ProjectSpace = "Space"
+		var ProjectEngineRevision = 15149
+		var AutoTakeProjectScreenshot = true
+		var Guid = 0x5806f028e95e3821
+	}
+	EditorSettings 
 	{
-		EditorMode EditorMode = Mode2D,
-		bool ViewCube = true,
-		float ViewCubeSize = 0.150000006,
-		ScriptReloadMethod ScriptReloadEditor = ReInitializeObjects,
-		ScriptReloadMethod ScriptReloadGame = PatchObjects,
-		bool AutoUpdateContentChanges = true,
-	},
-	LauncherProjectInfo = 
+		var EditorMode = EditorMode.Mode2D
+		var ViewCube = true
+		var ViewCubeSize = 0.150000006
+		var ScriptReloadEditor = ScriptReloadMethod.ReInitializeObjects
+		var ScriptReloadGame = ScriptReloadMethod.PatchObjects
+		var AutoUpdateContentChanges = true
+	}
+	LauncherProjectInfo 
 	{
-		string Tags = "",
-		string ExperimentalBranch = "",
-		int MajorVersion = 0,
-		int MinorVersion = 0,
-		int PatchVersion = 0,
-		int RevisionId = 14599,
-	},
-},
+		var Tags = ""
+		var ExperimentalBranchName = "BraveCobra"
+		var MajorVersion = 0
+		var MinorVersion = 0
+		var PatchVersion = 0
+		var RevisionId = 15149
+	}
+}
