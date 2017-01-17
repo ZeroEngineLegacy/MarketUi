@@ -40,6 +40,7 @@ Level
 		SpaceCreator 
 		{
 			var SpaceArchetype = "58381740e1c56257:HUDSpace"
+			var NewSpaceName = "HUDSpace"
 			var LevelToLoad = "583815a9adea71ca:HUD"
 		}
 	}

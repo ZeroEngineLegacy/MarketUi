@@ -22,7 +22,6 @@ class LoadLevelOnEvent : ZilchComponent
     
     function OnPropertyEvent(event : ZilchEvent)
     {
-        Console.WriteLine("WE");
         this.Space.LoadLevel(this.LevelToLoad);
     }
 }
