@@ -81,7 +81,7 @@ Level
 			var FarPlane = 500
 			var PerspectiveMode = PerspectiveMode.Orthographic
 			var FieldOfView = 45
-			var Size = 40.2750397
+			var Size = 81.1039352
 		}
 		DefaultRenderer 
 		{

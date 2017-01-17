@@ -25,9 +25,11 @@ class SpaceCreator : ZilchComponent
         //Create the space and then load our level into it
         this.CreatedSpace = this.GameSession.CreateNamedSpace("Space", this.SpaceArchetype);
         this.CreatedSpace.LoadLevel(this.LevelToLoad);
+        
+        Zero.Connect(this.Owner, Events.CogDestroy, this.Destroyed);
     }
     
-    function Destroyed()
+    function Destroyed(event : ObjectEvent)
     {
         //Make sure to clean up the space when we get destroyed
         if(this.CreatedSpace != null)

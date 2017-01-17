@@ -12,9 +12,9 @@ Level
 		var LinkId = 2
 		Transform 
 		{
-			var Translation = Vec3{-0.318077147, 0.84666568, 50}
+			var Translation = Vec3{0, -0.523588359, 49.9972572}
 			var Scale = Vec3{1, 1, 1}
-			var Rotation = Quat{-0, -1.09278471e-08, 0, 1}
+			var Rotation = Quat{0.00523595512, -1.09279972e-08, 1.14435433e-10, 0.999986291}
 		}
 		CameraViewport 
 		{
@@ -66,7 +66,7 @@ Level
 			var FarPlane = 500
 			var PerspectiveMode = PerspectiveMode.Orthographic
 			var FieldOfView = 45
-			var Size = 10.976263
+			var Size = 297.594574
 		}
 		DefaultRenderer 
 		{
@@ -77,9 +77,9 @@ Level
 		{
 			var ControlMode = ControlMode.ZPlane
 			var LookDistance = 50
-			var VerticalAngle = 0
+			var VerticalAngle = -0.0104719587
 			var HorizontalAngle = 0
-			var LookTarget = Vec3{-0.318077147, 0.84666568, -6.65793394e-08}
+			var LookTarget = Vec3{0, 0, 0}
 			var MoveSensitivity = 1
 		}
 	}
