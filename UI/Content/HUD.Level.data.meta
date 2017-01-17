@@ -3,8 +3,8 @@ DataContent
 {
 	DataBuilder 
 	{
-		var Name = "DigiPenLogo"
-		var ResourceId = 0x5823bf5abe9008fa
+		var Name = "HUD"
+		var ResourceId = 0x583815a9adea71ca
 		var LoaderType = "Level"
 		var Version = 0
 		var ShowInEditor = true
@@ -13,8 +13,8 @@ DataContent
 	{
 		var Tags = Array
 		{
-			"SplashScreen"
 			"UI"
+			"HUD"
 		}
 	}
 }
