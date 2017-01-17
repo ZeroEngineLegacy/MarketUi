@@ -13,6 +13,7 @@ DataContent
 	{
 		var Tags = Array
 		{
+			"Root"
 			"SplashScreen"
 			"UI"
 		}

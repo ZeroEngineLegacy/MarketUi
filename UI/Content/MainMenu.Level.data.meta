@@ -13,7 +13,6 @@ DataContent
 	{
 		var Tags = Array
 		{
-			"Root"
 			"UI"
 		}
 	}
