@@ -27,7 +27,7 @@ Level
 		var LinkId = 2
 		Transform 
 		{
-			var Translation = Vec3{0, 0, 50}
+			var Translation = Vec3{-12.9580259, 5.58884192, 50}
 			var Scale = Vec3{1, 1, 1}
 			var Rotation = Quat{-0, -1.09278471e-08, 0, 1}
 		}
@@ -81,7 +81,7 @@ Level
 			var FarPlane = 500
 			var PerspectiveMode = PerspectiveMode.Orthographic
 			var FieldOfView = 45
-			var Size = 81.1039352
+			var Size = 13.4064064
 		}
 		DefaultRenderer 
 		{
@@ -94,7 +94,7 @@ Level
 			var LookDistance = 50
 			var VerticalAngle = 0
 			var HorizontalAngle = 0
-			var LookTarget = Vec3{0, 0, 0}
+			var LookTarget = Vec3{-12.9580259, 5.58884192, -5.73694706e-07}
 			var MoveSensitivity = 1
 		}
 	}
@@ -175,10 +175,6 @@ Level
 		Transform 
 		{
 			var Translation = Vec3{-12.9580259, 6.70129871, 0}
-		}
-		Sprite 
-		{
-			var VertexColor = Vec4{1, 1, 1, 1}
 		}
 		Area 
 		{
