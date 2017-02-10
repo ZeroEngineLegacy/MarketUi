@@ -9,19 +9,19 @@
 
 class LoadLevelOnEvent : ZilchComponent
 {
-    [Property]
-    var EventString : String;
-    
-    [Property]
-    var LevelToLoad : Level;
-    
-    function Initialize(init : CogInitializer)
-    {
-        Zero.Connect(this.Owner, this.EventString, this.OnPropertyEvent);
-    }
-    
-    function OnPropertyEvent(event : ZilchEvent)
-    {
-        this.Space.LoadLevel(this.LevelToLoad);
-    }
+  [Property]
+  var EventString : String;
+  
+  [Property]
+  var LevelToLoad : Level;
+  
+  function Initialize(init : CogInitializer)
+  {
+    Zero.Connect(this.Owner, this.EventString, this.OnPropertyEvent);
+  }
+  
+  function OnPropertyEvent(event : ZilchEvent)
+  {
+    this.Space.LoadLevel(this.LevelToLoad);
+  }
 }

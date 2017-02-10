@@ -11,82 +11,82 @@
 // Class for a custom event that requests a confirmation window to appear
 class ConfirmationPopUpRequest : ZilchEvent
 {
-    sends ConfirmationPopUpRequest : ConfirmationPopUpRequest;
-    var Source : Cog = null;
-    var ConSpace : Space;
-    var ResponseFunction : any = null;
+  sends ConfirmationPopUpRequest : ConfirmationPopUpRequest;
+  var Source : Cog = null;
+  var ConSpace : Space;
+  var ResponseFunction : any = null;
 }
 
 // Class for a custom event that responds to a confirmation request either affirmtively (true) 
 // or negatiovely (false). 
 class ConfirmationPopUpResponse : ZilchEvent
 {
-    sends ConfirmationPopUpResponse : ConfirmationPopUpResponse;
-    var Response : Boolean = false;
+  sends ConfirmationPopUpResponse : ConfirmationPopUpResponse;
+  var Response : Boolean = false;
 }
 
 class ModalInterupt : ZilchEvent
 {
-    sends ModalInterupt : ModalInterupt;
-    var Source : Cog;
+  sends ModalInterupt : ModalInterupt;
+  var Source : Cog;
 }
 
 class ConfirmationPopUp : ZilchComponent
 {
-    // The level with the confirmation window in it to be loaded in the new space
-    [Property]
-    var ConLevel : Level;
+  // The level with the confirmation window in it to be loaded in the new space
+  [Property]
+  var ConLevel : Level;
+  
+  // Space archetype used to create the new space for the level containing the
+  // confirmation window
+  [Property]
+  var ConSpaceArchetype : Archetype;
+  
+  // Variable to reference the new space where the confirmation window will exist
+  var ConSpace : Space;
+  
+  var ResponseFunction : delegate();
+  
+  function Initialize(init : CogInitializer)
+  {
+    Zero.Connect(this.Space, Events.ConfirmationPopUpRequest, this.OnConfirmationPopUpRequest);
+  }
+  
+  // When ConfirmationPopUpRequest event is heard a module dialog should appear
+  // asking "Are you sure?"
+  function OnConfirmationPopUpRequest(event : ConfirmationPopUpRequest)
+  {
+    //Store the function to call if we get an affirmative response
+    this.ResponseFunction = event.ResponseFunction;
     
-    // Space archetype used to create the new space for the level containing the
-    // confirmation window
-    [Property]
-    var ConSpaceArchetype : Archetype;
+    // Create a new space made the confirmation window
+    this.ConSpace = this.GameSession.CreateNamedSpace("ConSpace", this.ConSpaceArchetype);
     
-    // Variable to reference the new space where the confirmation window will exist
-    var ConSpace : Space;
+    // As this is a module dialog all underlying UI elements should be disabled
+    this.ConSpace.LoadLevel(this.ConLevel);
     
-    var ResponseFunction : delegate();
+    //Return Space to event sender
+    event.ConSpace = this.ConSpace;
     
-    function Initialize(init : CogInitializer)
+    // Connect to ConfirmationPopUpResponse on the modal dialog
+    Zero.Connect(this.Space, Events.ConfirmationPopUpResponse, this.OnConfirmationPopUpResponse);
+  }
+  
+  //Boolean response event sent by the modal dialog
+  function OnConfirmationPopUpResponse(event : ConfirmationPopUpResponse)
+  {
+    Console.WriteLine(event.Response);
+    // If the the response sent with the event is true...
+    if(event.Response)
     {
-        Zero.Connect(this.Space, Events.ConfirmationPopUpRequest, this.OnConfirmationPopUpRequest);
+      //Call the response function
+      this.ResponseFunction();
     }
     
-    // When ConfirmationPopUpRequest event is heard a module dialog should appear
-    // asking "Are you sure?"
-    function OnConfirmationPopUpRequest(event : ConfirmationPopUpRequest)
-    {
-        //Store the function to call if we get an affirmative response
-        this.ResponseFunction = event.ResponseFunction;
-        
-        // Create a new space made the confirmation window
-        this.ConSpace = this.GameSession.CreateNamedSpace("ConSpace", this.ConSpaceArchetype);
-        
-        // As this is a module dialog all underlying UI elements should be disabled
-        this.ConSpace.LoadLevel(this.ConLevel);
-        
-        //Return Space to event sender
-        event.ConSpace = this.ConSpace;
-        
-        // Connect to ConfirmationPopUpResponse on the modal dialog
-        Zero.Connect(this.Space, Events.ConfirmationPopUpResponse, this.OnConfirmationPopUpResponse);
-    }
+    // Disconnects from the ConfirmationPopUpResponse cusotm event
+    Zero.Disconnect(this.Space, Events.ConfirmationPopUpResponse, this.Owner);
     
-    //Boolean response event sent by the modal dialog
-    function OnConfirmationPopUpResponse(event : ConfirmationPopUpResponse)
-    {
-        Console.WriteLine(event.Response);
-        // If the the response sent with the event is true...
-        if(event.Response)
-        {
-            //Call the response function
-            this.ResponseFunction();
-        }
-        
-        // Disconnects from the ConfirmationPopUpResponse cusotm event
-        Zero.Disconnect(this.Space, Events.ConfirmationPopUpResponse, this.Owner);
-        
-        //Destroys the space created for the confirmation window level
-        this.ConSpace.Destroy();
-    }
+    //Destroys the space created for the confirmation window level
+    this.ConSpace.Destroy();
+  }
 }

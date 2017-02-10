@@ -1,35 +1,35 @@
 class HUDRenderer : ZilchComponent
 {
-    [Property] var ClearColor : Real4 = Real4(0, 0, 0, 1);
-    [Property] var DrawDebug : Boolean = false;
+  [Property] var ClearColor : Real4 = Real4(0, 0, 0, 1);
+  [Property] var DrawDebug : Boolean = false;
 
-    function Initialize(init : CogInitializer)
+  function Initialize(init : CogInitializer)
+  {
+    Zero.Connect(this.Owner, Events.RenderTasksUpdate, this.OnRenderTasksUpdate);
+  }
+
+  function OnRenderTasksUpdate(event : RenderTasksEvent)
+  {
+    var size = event.GetViewportSize();
+    var color = event.GetFinalTarget(size, TextureFormat.RGBA8);
+    var depth = event.GetRenderTarget(size, TextureFormat.Depth32);
+
+    var opaqueSettings = RenderSettings() {CullMode = CullMode.BackFace};
+    opaqueSettings.SetDepthWrite(DepthTest.LessEqual);
+
+    var alphaSettings = RenderSettings();
+    alphaSettings.SetDepthRead(DepthTest.LessEqual);
+    alphaSettings.SetBlendAlpha();
+
+    var renderPass = DefaultRenderPass();
+    event.AddRenderTaskClearTarget(color, depth, this.ClearColor, 1.0);
+    event.AddRenderTaskRenderPass(color, depth, opaqueSettings, RenderGroup.DefaultRenderGroup, renderPass);
+    event.AddRenderTaskRenderPass(color, depth, alphaSettings, RenderGroup.AlphaBlend, renderPass);
+
+    if (this.DrawDebug)
     {
-        Zero.Connect(this.Owner, Events.RenderTasksUpdate, this.OnRenderTasksUpdate);
+      event.AddRenderTaskRenderPass(color, depth, alphaSettings, RenderGroup.DebugDraw, renderPass);
+      event.AddRenderTaskRenderPass(color, null, alphaSettings, RenderGroup.DebugDrawOnTop, renderPass);
     }
-
-    function OnRenderTasksUpdate(event : RenderTasksEvent)
-    {
-        var size = event.GetViewportSize();
-        var color = event.GetFinalTarget(size, TextureFormat.RGBA8);
-        var depth = event.GetRenderTarget(size, TextureFormat.Depth32);
-
-        var opaqueSettings = RenderSettings() {CullMode = CullMode.BackFace};
-        opaqueSettings.SetDepthWrite(DepthTest.LessEqual);
-
-        var alphaSettings = RenderSettings();
-        alphaSettings.SetDepthRead(DepthTest.LessEqual);
-        alphaSettings.SetBlendAlpha();
-
-        var renderPass = DefaultRenderPass();
-        event.AddRenderTaskClearTarget(color, depth, this.ClearColor, 1.0);
-        event.AddRenderTaskRenderPass(color, depth, opaqueSettings, RenderGroup.DefaultRenderGroup, renderPass);
-        event.AddRenderTaskRenderPass(color, depth, alphaSettings, RenderGroup.AlphaBlend, renderPass);
-
-        if (this.DrawDebug)
-        {
-            event.AddRenderTaskRenderPass(color, depth, alphaSettings, RenderGroup.DebugDraw, renderPass);
-            event.AddRenderTaskRenderPass(color, null, alphaSettings, RenderGroup.DebugDrawOnTop, renderPass);
-        }
-    }
+  }
 }
