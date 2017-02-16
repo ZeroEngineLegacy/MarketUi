@@ -8,7 +8,7 @@ Cog
 		var ProjectOwner = ""
 		var DefaultLevel = "Level"
 		var ProjectSpace = "Space"
-		var ProjectEngineRevision = 15390
+		var ProjectEngineRevision = 15450
 		var AutoTakeProjectScreenshot = true
 		var Guid = 0x5806f028e95e3821
 	}
@@ -20,6 +20,10 @@ Cog
 		var ScriptReloadGame = ScriptReloadMethod.PatchObjects
 		var AutoUpdateContentChanges = true
 	}
+	ProjectSettings 
+	{
+		var EditorMode = EditorMode.Mode3D
+	}
 	LauncherProjectInfo 
 	{
 		var Tags = ""
@@ -27,10 +31,6 @@ Cog
 		var MajorVersion = 0
 		var MinorVersion = 0
 		var PatchVersion = 0
-		var RevisionId = 15390
-	}
-	ProjectSettings 
-	{
-		var EditorMode = EditorMode.Mode3D
+		var RevisionId = 15450
 	}
 }

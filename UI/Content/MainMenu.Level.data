@@ -33,8 +33,8 @@ Level
 			var AlwaysDrawInEditor = true
 			var DrawInGame = false
 			var GridColor = Vec4{0.5, 0.5, 0.5, 0.400000006}
-			var GridHiLight = Vec4{0, 0, 0, 0.400000006}
-			var HilightInterval = 10
+			var GridHighlight = Vec4{0, 0, 0, 0.400000006}
+			var HighlightInterval = 10
 			var FollowEditorCamera = false
 		}
 	}
@@ -44,16 +44,16 @@ Level
 		var LinkId = 2
 		Transform 
 		{
-			var Translation = Vec3{0, -2, 50.5656242}
+			var Translation = Vec3{-18.6597919, -11.1147108, 23.1654072}
 			var Scale = Vec3{1, 1, 1}
-			var Rotation = Quat{-0, -1.09278471e-08, 0, 1}
+			var Rotation = Quat{0.174482748, -0.347271264, 0.0659314916, 0.919027507}
 		}
 		Camera 
 		{
 			var Facing = Facing.NegativeZ
 			var NearPlane = 0.5
 			var FarPlane = 500
-			var PerspectiveMode = PerspectiveMode.Orthographic
+			var PerspectiveMode = PerspectiveMode.Perspective
 			var FieldOfView = 45
 			var Size = 269.27475
 		}
@@ -107,11 +107,11 @@ Level
 		}
 		EditorCameraController 
 		{
-			var ControlMode = ControlMode.ZPlane
-			var LookDistance = 50
-			var VerticalAngle = 0
-			var HorizontalAngle = 0
-			var LookTarget = Vec3{0, -2, 0.565625012}
+			var ControlMode = ControlMode.Orbit
+			var LookDistance = 30.3265419
+			var VerticalAngle = -0.375245661
+			var HorizontalAngle = 0.722565711
+			var LookTarget = Vec3{0, 0, 2}
 			var MoveSensitivity = 1
 		}
 	}
@@ -191,7 +191,7 @@ Level
 	{
 		Transform 
 		{
-			var Translation = Vec3{-6.5, 2.5, 0}
+			var Translation = Vec3{-6.5, 2.5, 1}
 		}
 	}
 	Cog [InheritId:"5823ac357ca63d68:FadeSprite"]
@@ -642,10 +642,6 @@ Level
 						{
 							var Size = Vec2{16.5, 17.5}
 							var Origin = Location.Center
-						}
-						Reactive 
-						{
-							var Active = true
 						}
 					}
 				}
