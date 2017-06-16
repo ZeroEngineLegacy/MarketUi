@@ -13,7 +13,7 @@ class SpriteSpinner : ZilchComponent
   var Transform : Transform;
   
   [Property]
-  var Axis : GridAxis = GridAxis.ZAxis;
+  var Axis : AxisDirection = AxisDirection.Z;
   
   [Property]
   var Speed : Real = 45.0;
@@ -35,11 +35,11 @@ class SpriteSpinner : ZilchComponent
     if(this.RotateClockwise)
       theta *= -1.0;
     
-    if(this.Axis == GridAxis.XAxis)
+    if(this.Axis == AxisDirection.X)
       angles.X += theta;
-    else if(this.Axis == GridAxis.YAxis)
+    else if(this.Axis == AxisDirection.Y)
       angles.Y += theta;
-    else if(this.Axis == GridAxis.ZAxis)
+    else if(this.Axis == AxisDirection.Z)
       angles.Z += theta;
     
     this.Transform.RotateAnglesWorld(angles);

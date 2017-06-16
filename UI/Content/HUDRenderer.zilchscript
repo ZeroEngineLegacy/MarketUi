@@ -15,21 +15,10 @@ class HUDRenderer : ZilchComponent
     var depth = event.GetRenderTarget(size, TextureFormat.Depth32);
 
     var opaqueSettings = RenderSettings() {CullMode = CullMode.BackFace};
-    opaqueSettings.SetDepthWrite(DepthTest.LessEqual);
 
     var alphaSettings = RenderSettings();
-    alphaSettings.SetDepthRead(DepthTest.LessEqual);
-    alphaSettings.SetBlendAlpha();
 
     var renderPass = DefaultRenderPass();
     event.AddRenderTaskClearTarget(color, depth, this.ClearColor, 1.0);
-    event.AddRenderTaskRenderPass(color, depth, opaqueSettings, RenderGroup.DefaultRenderGroup, renderPass);
-    event.AddRenderTaskRenderPass(color, depth, alphaSettings, RenderGroup.AlphaBlend, renderPass);
-
-    if (this.DrawDebug)
-    {
-      event.AddRenderTaskRenderPass(color, depth, alphaSettings, RenderGroup.DebugDraw, renderPass);
-      event.AddRenderTaskRenderPass(color, null, alphaSettings, RenderGroup.DebugDrawOnTop, renderPass);
-    }
   }
 }

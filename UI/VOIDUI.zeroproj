@@ -2,13 +2,13 @@
 Cog 
 {
 	var Name = ""
-	Project 
+	ProjectSettings 
 	{
 		var ProjectName = "VOIDUI"
 		var ProjectOwner = ""
 		var DefaultLevel = "Level"
 		var ProjectSpace = "Space"
-		var ProjectEngineRevision = 15450
+		var ProjectEngineRevision = 16993
 		var AutoTakeProjectScreenshot = true
 		var Guid = 0x5806f028e95e3821
 	}
@@ -20,10 +20,6 @@ Cog
 		var ScriptReloadGame = ScriptReloadMethod.PatchObjects
 		var AutoUpdateContentChanges = true
 	}
-	ProjectSettings 
-	{
-		var EditorMode = EditorMode.Mode3D
-	}
 	LauncherProjectInfo 
 	{
 		var Tags = ""
@@ -31,6 +27,6 @@ Cog
 		var MajorVersion = 0
 		var MinorVersion = 0
 		var PatchVersion = 0
-		var RevisionId = 15450
+		var RevisionId = 16993
 	}
 }

@@ -1,8 +1,0 @@
-FontContent = 
-{
-	FontBuilder = 
-	{
-		string Name = "SAVINGSB_",
-		uint64 ResourceId = 583b98a70aa98e3e,
-	},
-},
