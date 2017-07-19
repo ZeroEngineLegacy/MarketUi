@@ -29,7 +29,7 @@ Level
 			var Active = true
 			var HalfCellOffset = false
 			var CellSize = 1
-			var Axis = AxisDirection.X
+			var Axis = AxisDirection.Z
 			var Lines = 100
 			var DrawAxisOrigins = true
 			var AlwaysDrawInEditor = true
@@ -82,7 +82,7 @@ Level
 			}
 			var RendererPath = CogPath
 			{
-				var Path = "."
+				var Path = ":/Renderer"
 				var ErrorOnResolveToNull = false
 				var ErrorOnPathCantCompute = false
 				var ErrorOnDirectLinkFail = false
@@ -90,7 +90,7 @@ Level
 				var UpdatePathOnCogChange = true
 				var UpdateCogOnInitialize = true
 				var ResolvedNullErrorOccurred = false
-				var ResolvedCog = 2
+				var ResolvedCog = 3
 				var PathPreference0 = CogPathPreference.CogRelative
 				var PathPreference1 = CogPathPreference.SpaceRelative
 				var PathPreference2 = CogPathPreference.Absolute
@@ -107,11 +107,6 @@ Level
 			var FieldOfView = 45
 			var Size = 32.9744415
 		}
-		DefaultRenderer 
-		{
-			var ClearColor = Real4{0.125, 0.125, 0.125, 1}
-			var DrawDebug = true
-		}
 		EditorCameraController 
 		{
 			var ControlMode = ControlMode.ZPlane
@@ -125,8 +120,8 @@ Level
 	}
 	Cog 
 	{
-		var Name = "Camera"
-		var LinkId = 3
+		var Name = "GameCamera"
+		var LinkId = 4
 		Transform 
 		{
 			var Translation = Real3{0, 0, 50}
@@ -152,14 +147,14 @@ Level
 				var UpdatePathOnCogChange = true
 				var UpdateCogOnInitialize = true
 				var ResolvedNullErrorOccurred = false
-				var ResolvedCog = 3
+				var ResolvedCog = 4
 				var PathPreference0 = CogPathPreference.CogRelative
 				var PathPreference1 = CogPathPreference.SpaceRelative
 				var PathPreference2 = CogPathPreference.Absolute
 			}
 			var RendererPath = CogPath
 			{
-				var Path = "."
+				var Path = ":/Renderer"
 				var ErrorOnResolveToNull = false
 				var ErrorOnPathCantCompute = false
 				var ErrorOnDirectLinkFail = false
@@ -184,11 +179,6 @@ Level
 			var FieldOfView = 45
 			var Size = 20
 		}
-		DefaultRenderer 
-		{
-			var ClearColor = Real4{0, 0, 0, 1}
-			var DrawDebug = false
-		}
 		SoundListener 
 		{
 			var Active = true
@@ -196,8 +186,42 @@ Level
 	}
 	Cog 
 	{
+		var Name = "Renderer"
+		var LinkId = 3
+		ForwardRenderer 
+		{
+			var EditorDebugDraw = true
+			var GameDebugDraw = true
+			var RenderDiffuse = true
+			var RenderSpecular = true
+			var RenderSkybox = false
+			var Skybox = "5822dec85e380cf1:SimpleSkybox"
+			var ClearColor = Real4{0, 0, 0, 1}
+			var DirectLighting = true
+			var IndirectLighting = true
+			var IndirectIntensity = 1
+			var ToneMap = true
+			var DirectionalLight = CogPath
+			{
+				var Path = ""
+				var ErrorOnResolveToNull = false
+				var ErrorOnPathCantCompute = false
+				var ErrorOnDirectLinkFail = false
+				var UpdateCogOnPathChange = true
+				var UpdatePathOnCogChange = true
+				var UpdateCogOnInitialize = true
+				var ResolvedNullErrorOccurred = false
+				var ResolvedCog = 4294967293
+				var PathPreference0 = CogPathPreference.CogRelative
+				var PathPreference1 = CogPathPreference.SpaceRelative
+				var PathPreference2 = CogPathPreference.Absolute
+			}
+		}
+	}
+	Cog 
+	{
 		var Name = "GameBackground"
-		var LinkId = 4
+		var LinkId = 5
 		Transform 
 		{
 			var Translation = Real3{0, 0, 0}
@@ -213,7 +237,7 @@ Level
 			var LocalAabbCenter = Real3{0, 0, 0}
 			var LocalAabbHalfExtents = Real3{1, 1, 1}
 			var GroupSortValue = 0
-			var Material = "56dcc7b15f51207d:DefaultSpriteMaterial"
+			var Material = "582c575af53d18c9:AlphaSprite"
 			var VertexColor = Real4{0, 0.349019498, 0.600000024, 1}
 			var GeometryMode = SpriteGeometryMode.ZPlane
 			var SpriteSource = "5586f579ca73ecc2:SquareBordered"
@@ -233,7 +257,7 @@ Level
 			Cog 
 			{
 				var Name = "HowToPlayFront"
-				var LinkId = 5
+				var LinkId = 6
 				Transform 
 				{
 					var Translation = Real3{0, 0, 0.100000001}
@@ -249,7 +273,7 @@ Level
 					var LocalAabbCenter = Real3{0, 0, 0}
 					var LocalAabbHalfExtents = Real3{1, 1, 1}
 					var GroupSortValue = 0
-					var Material = "56dcc7b15f51207d:DefaultSpriteMaterial"
+					var Material = "582c575af53d18c9:AlphaSprite"
 					var VertexColor = Real4{0, 0.494117647, 0.90196085, 1}
 					var GeometryMode = SpriteGeometryMode.ZPlane
 					var SpriteSource = "5586f579ca73ecc2:SquareBordered"
@@ -269,7 +293,7 @@ Level
 					Cog 
 					{
 						var Name = "HowToPlayText"
-						var LinkId = 6
+						var LinkId = 7
 						Transform 
 						{
 							var Translation = Real3{0, 0, 0.100000001}
@@ -285,7 +309,7 @@ Level
 							var LocalAabbCenter = Real3{0, 0, 0}
 							var LocalAabbHalfExtents = Real3{1, 1, 1}
 							var GroupSortValue = 0
-							var Material = "56dcc7b15f51207d:DefaultSpriteMaterial"
+							var Material = "582c575af53d18c9:AlphaSprite"
 							var VertexColor = Real4{1, 1, 1, 1}
 							var GeometryMode = SpriteGeometryMode.ZPlane
 							var Text = "Congratulations! You Won!"
@@ -307,7 +331,7 @@ Level
 	Cog 
 	{
 		var Name = "GameBackground"
-		var LinkId = 7
+		var LinkId = 8
 		Transform 
 		{
 			var Translation = Real3{0, 5, 0}
@@ -323,7 +347,7 @@ Level
 			var LocalAabbCenter = Real3{0, 0, 0}
 			var LocalAabbHalfExtents = Real3{1, 1, 1}
 			var GroupSortValue = 0
-			var Material = "56dcc7b15f51207d:DefaultSpriteMaterial"
+			var Material = "582c575af53d18c9:AlphaSprite"
 			var VertexColor = Real4{0, 0.349019498, 0.600000024, 1}
 			var GeometryMode = SpriteGeometryMode.ZPlane
 			var SpriteSource = "5586f579ca73ecc2:SquareBordered"
@@ -343,7 +367,7 @@ Level
 			Cog 
 			{
 				var Name = "HowToPlayFront"
-				var LinkId = 8
+				var LinkId = 9
 				Transform 
 				{
 					var Translation = Real3{0, 0, 0.100000001}
@@ -359,7 +383,7 @@ Level
 					var LocalAabbCenter = Real3{0, 0, 0}
 					var LocalAabbHalfExtents = Real3{1, 1, 1}
 					var GroupSortValue = 0
-					var Material = "56dcc7b15f51207d:DefaultSpriteMaterial"
+					var Material = "582c575af53d18c9:AlphaSprite"
 					var VertexColor = Real4{0, 0.494117647, 0.90196085, 1}
 					var GeometryMode = SpriteGeometryMode.ZPlane
 					var SpriteSource = "5586f579ca73ecc2:SquareBordered"
@@ -379,7 +403,7 @@ Level
 					Cog 
 					{
 						var Name = "HowToPlayText"
-						var LinkId = 9
+						var LinkId = 10
 						Transform 
 						{
 							var Translation = Real3{0, 0, 0.100000001}
@@ -395,7 +419,7 @@ Level
 							var LocalAabbCenter = Real3{0, 0, 0}
 							var LocalAabbHalfExtents = Real3{1, 1, 1}
 							var GroupSortValue = 0
-							var Material = "56dcc7b15f51207d:DefaultSpriteMaterial"
+							var Material = "582c575af53d18c9:AlphaSprite"
 							var VertexColor = Real4{1, 1, 1, 1}
 							var GeometryMode = SpriteGeometryMode.ZPlane
 							var Text = "Press Escape To Pause"
@@ -417,7 +441,7 @@ Level
 	Cog 
 	{
 		var Name = "ReturnButton"
-		var LinkId = 10
+		var LinkId = 11
 		Transform 
 		{
 			var Translation = Real3{0, -4, 0}
@@ -433,7 +457,7 @@ Level
 			var LocalAabbCenter = Real3{0, 0, 0}
 			var LocalAabbHalfExtents = Real3{1, 1, 1}
 			var GroupSortValue = 0
-			var Material = "56dcc7b15f51207d:DefaultSpriteMaterial"
+			var Material = "582c575af53d18c9:AlphaSprite"
 			var VertexColor = Real4{1, 1, 1, 1}
 			var GeometryMode = SpriteGeometryMode.ZPlane
 			var SpriteSource = "5586f579ca73ecc2:SquareBordered"
@@ -485,7 +509,7 @@ Level
 			Cog 
 			{
 				var Name = "ReturnText"
-				var LinkId = 11
+				var LinkId = 12
 				Transform 
 				{
 					var Translation = Real3{0, 0, 0.100000001}
@@ -501,7 +525,7 @@ Level
 					var LocalAabbCenter = Real3{0, 0, 0}
 					var LocalAabbHalfExtents = Real3{1, 1, 1}
 					var GroupSortValue = 0
-					var Material = "56dcc7b15f51207d:DefaultSpriteMaterial"
+					var Material = "582c575af53d18c9:AlphaSprite"
 					var VertexColor = Real4{0, 0, 0, 1}
 					var GeometryMode = SpriteGeometryMode.ZPlane
 					var Text = "Return"

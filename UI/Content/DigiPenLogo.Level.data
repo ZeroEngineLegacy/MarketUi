@@ -9,14 +9,16 @@ Level
 		{
 			var Active = true
 			var WakeUpOnChange = false
+			var DebugDrawEffect = true
 			var LocalSpaceDirection = true
 			var Strength = 10
-			var Direction = Vec3{0, -1, 0}
+			var Direction = Real3{0, -1, 0}
 		}
 		DragEffect 
 		{
 			var Active = true
 			var WakeUpOnChange = false
+			var DebugDrawEffect = true
 			var LinearDamping = 0.200000003
 			var AngularDamping = 0.100000001
 			var LinearDrag = 0
@@ -27,14 +29,14 @@ Level
 			var Active = true
 			var HalfCellOffset = false
 			var CellSize = 1
-			var Axis = GridAxis.ZAxis
+			var Axis = AxisDirection.Z
 			var Lines = 100
 			var DrawAxisOrigins = true
 			var AlwaysDrawInEditor = true
 			var DrawInGame = false
-			var GridColor = Vec4{0.5, 0.5, 0.5, 0.400000006}
-			var GridHiLight = Vec4{0, 0, 0, 0.400000006}
-			var HilightInterval = 10
+			var GridColor = Real4{0.5, 0.5, 0.5, 0.400000006}
+			var GridHighlight = Real4{0, 0, 0, 0.400000006}
+			var HighlightInterval = 10
 			var FollowEditorCamera = false
 		}
 	}
@@ -44,9 +46,9 @@ Level
 		var LinkId = 2
 		Transform 
 		{
-			var Translation = Vec3{0, 0, 50}
-			var Scale = Vec3{1, 1, 1}
-			var Rotation = Quat{-0, -1.09278471e-08, 0, 1}
+			var Translation = Real3{2.63277555, -20.4058361, 41.3132172}
+			var Scale = Real3{1, 1, 1}
+			var Rotation = Quaternion{-0, -1.09278471e-08, 0, 1}
 		}
 		CameraViewport 
 		{
@@ -55,9 +57,9 @@ Level
 			var RenderToViewport = true
 			var ForwardViewportEvents = false
 			var RenderOrder = 0
-			var NormalizedSize = Vec2{1, 1}
-			var NormalizedOffset = Vec2{0, 0}
-			var Camera = CogPath
+			var NormalizedSize = Real2{1, 1}
+			var NormalizedOffset = Real2{0, 0}
+			var CameraPath = CogPath
 			{
 				var Path = "."
 				var ErrorOnResolveToNull = false
@@ -72,9 +74,9 @@ Level
 				var PathPreference1 = CogPathPreference.SpaceRelative
 				var PathPreference2 = CogPathPreference.Absolute
 			}
-			var Renderer = CogPath
+			var RendererPath = CogPath
 			{
-				var Path = "."
+				var Path = ":/Renderer"
 				var ErrorOnResolveToNull = false
 				var ErrorOnPathCantCompute = false
 				var ErrorOnDirectLinkFail = false
@@ -82,48 +84,43 @@ Level
 				var UpdatePathOnCogChange = true
 				var UpdateCogOnInitialize = true
 				var ResolvedNullErrorOccurred = false
-				var ResolvedCog = 2
+				var ResolvedCog = 3
 				var PathPreference0 = CogPathPreference.CogRelative
 				var PathPreference1 = CogPathPreference.SpaceRelative
 				var PathPreference2 = CogPathPreference.Absolute
 			}
-			var Resolution = Vec2{1920, 1080}
+			var Resolution = Real2{1920, 1080}
 			var ViewportScaling = ViewportScaling.Fill
-			var MarginColor = Vec4{0, 0, 0, 1}
+			var MarginColor = Real4{0, 0, 0, 1}
 		}
 		Camera 
 		{
-			var Facing = Facing.NegativeZ
 			var NearPlane = 0.5
 			var FarPlane = 500
 			var PerspectiveMode = PerspectiveMode.Orthographic
 			var FieldOfView = 45
-			var Size = 269.274353
-		}
-		DefaultRenderer 
-		{
-			var ClearColor = Vec4{0.125, 0.125, 0.125, 1}
-			var DrawDebug = true
+			var Size = 220.463028
 		}
 		EditorCameraController 
 		{
 			var ControlMode = ControlMode.ZPlane
+			var Previous3DMode = ControlMode.Orbit
 			var LookDistance = 50
 			var VerticalAngle = 0
 			var HorizontalAngle = 0
-			var LookTarget = Vec3{0, 0, 0}
+			var LookTarget = Real3{2.63277555, -20.4058361, -8.68678379}
 			var MoveSensitivity = 1
 		}
 	}
 	Cog 
 	{
-		var Name = "Camera"
-		var LinkId = 3
+		var Name = "GameCamera"
+		var LinkId = 4
 		Transform 
 		{
-			var Translation = Vec3{0, 0, 50}
-			var Scale = Vec3{1, 1, 1}
-			var Rotation = Quat{0, 0, 0, 1}
+			var Translation = Real3{0, 0, 50}
+			var Scale = Real3{1, 1, 1}
+			var Rotation = Quaternion{0, 0, 0, 1}
 		}
 		CameraViewport 
 		{
@@ -132,11 +129,26 @@ Level
 			var RenderToViewport = true
 			var ForwardViewportEvents = false
 			var RenderOrder = 0
-			var NormalizedSize = Vec2{1, 1}
-			var NormalizedOffset = Vec2{0, 0}
-			var Camera = CogPath
+			var NormalizedSize = Real2{1, 1}
+			var NormalizedOffset = Real2{0, 0}
+			var CameraPath = CogPath
 			{
 				var Path = "."
+				var ErrorOnResolveToNull = false
+				var ErrorOnPathCantCompute = false
+				var ErrorOnDirectLinkFail = false
+				var UpdateCogOnPathChange = true
+				var UpdatePathOnCogChange = true
+				var UpdateCogOnInitialize = true
+				var ResolvedNullErrorOccurred = false
+				var ResolvedCog = 4
+				var PathPreference0 = CogPathPreference.CogRelative
+				var PathPreference1 = CogPathPreference.SpaceRelative
+				var PathPreference2 = CogPathPreference.Absolute
+			}
+			var RendererPath = CogPath
+			{
+				var Path = ":/Renderer"
 				var ErrorOnResolveToNull = false
 				var ErrorOnPathCantCompute = false
 				var ErrorOnDirectLinkFail = false
@@ -149,38 +161,17 @@ Level
 				var PathPreference1 = CogPathPreference.SpaceRelative
 				var PathPreference2 = CogPathPreference.Absolute
 			}
-			var Renderer = CogPath
-			{
-				var Path = "."
-				var ErrorOnResolveToNull = false
-				var ErrorOnPathCantCompute = false
-				var ErrorOnDirectLinkFail = false
-				var UpdateCogOnPathChange = true
-				var UpdatePathOnCogChange = true
-				var UpdateCogOnInitialize = true
-				var ResolvedNullErrorOccurred = false
-				var ResolvedCog = 3
-				var PathPreference0 = CogPathPreference.CogRelative
-				var PathPreference1 = CogPathPreference.SpaceRelative
-				var PathPreference2 = CogPathPreference.Absolute
-			}
-			var Resolution = Vec2{1920, 1080}
+			var Resolution = Real2{1920, 1080}
 			var ViewportScaling = ViewportScaling.Letterbox
-			var MarginColor = Vec4{0, 0, 0, 1}
+			var MarginColor = Real4{0, 0, 0, 1}
 		}
 		Camera 
 		{
-			var Facing = Facing.NegativeZ
 			var NearPlane = 0.5
 			var FarPlane = 100
 			var PerspectiveMode = PerspectiveMode.Orthographic
 			var FieldOfView = 45
 			var Size = 20
-		}
-		DefaultRenderer 
-		{
-			var ClearColor = Vec4{1, 1, 1, 1}
-			var DrawDebug = false
 		}
 		SoundListener 
 		{
@@ -189,21 +180,59 @@ Level
 	}
 	Cog 
 	{
+		var Name = "Renderer"
+		var LinkId = 3
+		ForwardRenderer 
+		{
+			var EditorDebugDraw = true
+			var GameDebugDraw = true
+			var RenderDiffuse = true
+			var RenderSpecular = true
+			var RenderSkybox = false
+			var Skybox = "5822dec85e380cf1:SimpleSkybox"
+			var ClearColor = Real4{1, 1, 1, 1}
+			var DirectLighting = true
+			var IndirectLighting = true
+			var IndirectIntensity = 1
+			var ToneMap = true
+			var DirectionalLight = CogPath
+			{
+				var Path = ""
+				var ErrorOnResolveToNull = false
+				var ErrorOnPathCantCompute = false
+				var ErrorOnDirectLinkFail = false
+				var UpdateCogOnPathChange = true
+				var UpdatePathOnCogChange = true
+				var UpdateCogOnInitialize = true
+				var ResolvedNullErrorOccurred = false
+				var ResolvedCog = 4294967293
+				var PathPreference0 = CogPathPreference.CogRelative
+				var PathPreference1 = CogPathPreference.SpaceRelative
+				var PathPreference2 = CogPathPreference.Absolute
+			}
+		}
+	}
+	Cog 
+	{
 		var Name = "DPLogo"
-		var LinkId = 4
+		var LinkId = 5
 		Transform 
 		{
-			var Translation = Vec3{0, 0, 0}
-			var Scale = Vec3{1, 1, 1}
-			var Rotation = Quat{0, 0, 0, 1}
+			var Translation = Real3{0, 0, 0}
+			var Scale = Real3{1, 1, 1}
+			var Rotation = Quaternion{0, 0, 0, 1}
 		}
 		Sprite 
 		{
 			var Visible = true
 			var ViewCulling = true
 			var VisibilityEvents = true
-			var Material = "56dcc7b15f51207d:DefaultSpriteMaterial"
-			var VertexColor = Vec4{1, 1, 1, 1}
+			var OverrideBoundingBox = false
+			var LocalAabbCenter = Real3{0, 0, 0}
+			var LocalAabbHalfExtents = Real3{1, 1, 1}
+			var GroupSortValue = 0
+			var Material = "582c575af53d18c9:AlphaSprite"
+			var VertexColor = Real4{1, 1, 1, 1}
 			var GeometryMode = SpriteGeometryMode.ZPlane
 			var SpriteSource = "5823bf6fba57b994:DigiPenLogo"
 			var FlipX = false
@@ -217,13 +246,17 @@ Level
 	{
 		Transform 
 		{
-			var Translation = Vec3{0, 0, 1}
+			var Translation = Real3{0, 0, 2}
+		}
+		Sprite 
+		{
+			var Visible = true
 		}
 		SpriteFader 
 		{
 			var FadeInDuration = 2
 			var FadeOutDuration = 2
-			var FadeOutTarget = Vec4{1, 1, 1, 1}
+			var FadeOutTarget = Real4{1, 1, 1, 1}
 			var AutoFadeOut = true
 		}
 		LoadLevelOnEvent 
