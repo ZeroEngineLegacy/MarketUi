@@ -1,12 +1,9 @@
-/************************************************************************************************************/
-/* Copyright 2016 DigiPen, All Rights Reserved                                                              */
-/* Last Update: 1/3/2016                                                                                    */
-/* Author: Zero Engine Team                                                                                 */
-/* Last updated by: Arend Danielek                                                                          */
-/* Class: ConfirmationPopUp                                                                                 */
-/* Brief: This component is intended to be used with the UIMenuManager component. It should be attached     */
-/* to the LevelSettings object (or any permanent object) of any level where a confirmation may be needed.   */
-/************************************************************************************************************/
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Copyright 2016 DigiPen USA Corporation, All Rights Reserved
+// Author: Zero Engine Team
+// Last updated by: Arend Danielek
+// Last update: 7/24/2016
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Class for a custom event that requests a confirmation window to appear
 class ConfirmationPopUpRequest : ZilchEvent
@@ -31,6 +28,8 @@ class ModalInterupt : ZilchEvent
   var Source : Cog;
 }
 
+// This component is intended to be used with the UIMenuManager component. It should be attached
+// to the LevelSettings object (or any permanent object) of any level where a confirmation may be needed.
 class ConfirmationPopUp : ZilchComponent
 {
   // The level with the confirmation window in it to be loaded in the new space
@@ -72,7 +71,7 @@ class ConfirmationPopUp : ZilchComponent
     Zero.Connect(this.Space, Events.ConfirmationPopUpResponse, this.OnConfirmationPopUpResponse);
   }
   
-  //Boolean response event sent by the modal dialog
+  // Boolean response event sent by the modal dialog
   function OnConfirmationPopUpResponse(event : ConfirmationPopUpResponse)
   {
     Console.WriteLine(event.Response);

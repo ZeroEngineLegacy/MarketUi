@@ -1,13 +1,12 @@
-/************************************************************************************************************/
-/* Copyright 2017 DigiPen, All Rights Reserved                                                              */
-/* Last Update: 1/4/2017                                                                                    */
-/* Author: Zero Engine Team                                                                                 */
-/* Last updated by: Arend Danielek                                                                          */
-/* Class: UIMenuManager                                                                                     */
-/* Brief: This component is intended to be used with the UIButton component. This component should be       */
-/* attached to an object that is the parent of all objects that have a UIButton component within a level.   */
-/************************************************************************************************************/
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Copyright 2016 DigiPen USA Corporation, All Rights Reserved
+// Author: Zero Engine Team
+// Last updated by: Arend Danielek
+// Last update: 7/24/2016
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// This component is intended to be used with the UIButton component. This component should be
+// attached to an object that is the parent of all objects that have a UIButton component within a level.
 class UIMenuManager : ZilchComponent
 {
   // Should the component be active or not
@@ -48,7 +47,7 @@ class UIMenuManager : ZilchComponent
       // If buttons are on the confirmation window
       if(event.Button.Name == "ConfirmYesButton" || event.Button.Name == "ConfirmNoButton")
       {
-        // Make the selection arrow is invisible
+        // Make the selection arrow invisible
         this.SelectionArrow.Cog.Sprite.Visible = false;
       }
       // If the button is anywhere else (i.e., the main menu)
